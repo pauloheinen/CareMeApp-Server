@@ -112,6 +112,23 @@ public class UserController
         return userRest;
     }
 
+    @GetMapping( path = "/get/users/not/{id}", produces = { MediaType.APPLICATION_JSON_VALUE } )
+    public List<UserRest> getUsersButNot( @PathVariable( "id" ) String id )
+    {
+        List<UserRest> userRestList = new ArrayList<>();
+
+        List<UserDTO> users = userService.getUserButNotId( id );
+
+        for ( UserDTO userDTO : users )
+        {
+            UserRest userRest = new UserRest();
+            BeanUtils.copyProperties( userDTO, userRest );
+            userRestList.add( userRest );
+        }
+
+        return userRestList;
+    }
+
     @GetMapping( path = "/get/users", produces = { MediaType.APPLICATION_JSON_VALUE } )
     public List<UserRest> getUsers()
     {

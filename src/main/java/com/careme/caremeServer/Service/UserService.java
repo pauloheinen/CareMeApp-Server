@@ -13,4 +13,5 @@ public interface UserService
     UserDTO getUserById( String userId );
     UserDTO getUserByUsername( String username );
     List<UserDTO> getUsers();
+    List<UserDTO> getUserButNotId( String id );
 }

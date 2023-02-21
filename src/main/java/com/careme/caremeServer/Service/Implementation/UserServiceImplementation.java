@@ -106,6 +106,24 @@ public class UserServiceImplementation
     }
 
     @Override
+    public List<UserDTO> getUserButNotId( String id )
+    {
+        List<UserDTO> userDTOList = new ArrayList<>();
+
+        List<User> userList = userRepository.findAllButNot( id );
+
+        for ( User user : userList )
+        {
+            UserDTO userDTO = new UserDTO();
+            BeanUtils.copyProperties( user, userDTO );
+
+            userDTOList.add(userDTO);
+        }
+
+        return userDTOList;
+    }
+
+    @Override
     public List<UserDTO> getUsers()
     {
         List<UserDTO> userDTOList = new ArrayList<>();

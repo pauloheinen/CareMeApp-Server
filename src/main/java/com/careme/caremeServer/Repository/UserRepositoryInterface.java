@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserRepositoryInterface
         extends
@@ -24,4 +26,7 @@ public interface UserRepositoryInterface
 
     @Query( value = " select * from users where username = :username", nativeQuery = true )
     User findByUsername( String username );
+
+    @Query( value = " select * from users where id <> :id", nativeQuery = true )
+    List<User> findAllButNot( String id );
 }
